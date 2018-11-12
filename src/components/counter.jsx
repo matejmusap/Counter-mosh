@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    value: this.props.value
+    value: this.props.counter.value //counter is added because of property counter={counter} in counters.jsx
   };
   // constructor() {
   //   super();
@@ -22,6 +22,12 @@ class Counter extends Component {
           className="btn btn-secondary btn-sm"
         >
           Increment
+        </button>
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)} //counter is added because of property counter={counter} in counters.jsx
+          className="btn btn-danger btn-sm m-2"
+        >
+          DELETE
         </button>
       </div>
     );
