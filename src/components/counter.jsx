@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {
-    value: this.props.counter.value //counter is added because of property counter={counter} in counters.jsx
-  };
+  //   state = {
+  //     value: this.props.counter.value //counter is added because of property counter={counter} in counters.jsx
+  // };
+  //Removed becasue we need to remove local state
   // constructor() {
   //   super();
   //   this.handleIncrement = this.handleIncrement.bind(this);
-  // }  ovo je starndardni stari izraz => novi izraz je ispod i njega ćemo koristiti
+  // }  //This is standard expression => new way of writting is beneath
 
-  handleIncrement = () => {
-    this.setState({ value: this.state.value + 1 });
-  };
-
+  // handleIncrement = () => {
+  //   this.setState({ value: this.state.value + 1 });
+  // }; //has no sense without local state
   render() {
     return (
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -34,12 +34,12 @@ class Counter extends Component {
   }
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += this.state.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === 0 ? "warning" : "primary"; //remove this.state.value beacues removing local state
     return classes;
   }
 
   formatCount() {
-    const { value } = this.state;
+    const { value } = this.props.counter; //remove this.state.value beacues removing local state
     return value === 0 ? "Zero" : value;
   }
 }
