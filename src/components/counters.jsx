@@ -2,54 +2,21 @@ import React, { Component } from "react";
 import Counter from "./counter";
 
 class Counters extends Component {
-  state = {
-    counters: [
-      { id: 1, value: 0 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-      { id: 4, value: 0 }
-    ]
-  };
-
-  handleIncrement = counter => {
-    const counters = [...this.state.counters];
-    const index = counters.indexOf(counter);
-    counters[index] = { ...counter };
-    counters[index].value++;
-    this.setState({ counters });
-  };
-
-  handleReset = () => {
-    const counters = this.state.counters.map(c => {
-      c.value = 0;
-      return c;
-    });
-    this.setState({ counters });
-  };
-
-  handleDelete = counterId => {
-    const counters = this.state.counters.filter(c => c.id !== counterId);
-    this.setState({ counters }); //It is shortened this.setState({counters: counters}).
-  };
-
   render() {
+    const { onDelete, onIncrement, onReset, counters } = this.props; //exapmle of destructuring (not this.props.onDelete)
     return (
       <div>
-        <button
-          onClick={this.handleReset}
-          className="btn btn-primary btn-sm m-2"
-        >
+        <button onClick={onReset} className="btn btn-primary btn-sm m-2">
           RESET
         </button>
-        {this.state.counters.map(counter => (
+        {counters.map(counter => (
           <Counter
             key={counter.id}
-            onDelete={this.handleDelete}
-            onIncrement={this.handleIncrement}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
             counter={counter}
-            // onDelete={this.handleDelete}  Upper row replace commneted one
+            //  Upper row replace commneted one
             // value={counter.value}
-            // id={counter.id}
           />
         ))}
       </div>
